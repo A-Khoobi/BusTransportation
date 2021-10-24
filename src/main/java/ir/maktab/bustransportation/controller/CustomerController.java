@@ -43,7 +43,9 @@ public class CustomerController {
 
 
     @GetMapping("/Log-In")
-    public String displayLogInForm() {
+    public String displayLogInForm(Customer customer, HttpSession session, Model model) {
+        String massage = (String) session.getAttribute("massage");
+        model.addAttribute("massage", massage);
         return "logInForm";
     }
 
@@ -52,8 +54,15 @@ public class CustomerController {
         if (result.hasErrors()) {
             return "create-user";
         }
-        customerService.createCustomer(customer);
-        return "redirect:/Sign_up";
+        Customer ICustomer = customerService.logIn(customer);
+        if (ICustomer != null) {
+            session.setAttribute("customer", ICustomer);
+            return "redirect:/User-Page";
+        } else {
+            String massage = "Wrong UserName Or PassWord";
+            session.setAttribute("massage", massage);
+            return "redirect:/Log-In";
+        }
     }
 
 

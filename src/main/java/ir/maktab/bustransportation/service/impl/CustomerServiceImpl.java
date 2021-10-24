@@ -6,8 +6,6 @@ import ir.maktab.bustransportation.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -20,8 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        List<Customer> customers = customerRepository.findByUserName(customer.getUserName());
-        if (customers.size() == 0) {
+        Customer customer1 = customerRepository.findByUserName(customer.getUserName());
+        if (customer1 == null) {
             customerRepository.save(customer);
             return customer;
         } else return null;
@@ -29,7 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer logIn(Customer customer) {
-        return null;
+        Customer customer1 = customerRepository.findByUserName(customer.getUserName());
+        if (customer1 != null && customer.getPassWord().equals(customer1.getPassWord())) {
+            return customer1;
+        } else {
+            return null;
+        }
     }
 
 
