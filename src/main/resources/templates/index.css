@@ -1,0 +1,13 @@
+body {
+    background-color: #45a168;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    background-color: azure;
+    border-radius: 25px;
+    width: 700px;
+    height: 700px;
+}

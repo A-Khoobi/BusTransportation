@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            background-color: #0288d1;
+            justify-content: center;
+        }
+
+        .main {
+            display: flex;
+            border-radius: 6px;
+            height: 300px;
+            width: 500px;
+            background-color: azure;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .box {
+            border: 1px solid rgba(182, 175, 175, 0.274);
+            text-align: center;
+            display: flex;
+            height: 50px;
+            width: 250px;
+            border-radius: 3px;
+            background-color: rgba(182, 175, 175, 0.274);
+            margin: 4px;
+            padding: 0px;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <form method="post" th:action="@{/create-user}" th:object="${customer}">
+        <div class="box">Sign Up</div>
+        <div><input class="box" name="userName" placeholder="UserName" th:field="*{userName}" type="text"></div>
+        <div><input class="box" name="mobileNumber" placeholder="PhoneNumber" th:field="*{mobileNumber}" type="text">
+        </div>
+        <div><input class="box" name="passWord" placeholder="PassWord" th:field="*{passWord}" type="password"></div>
+        <div><input class="box" type="submit" value="SignUp"></div>
+    </form>
+</div>
+</body>
+</html>
