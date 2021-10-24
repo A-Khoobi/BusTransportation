@@ -40,16 +40,12 @@
 </head>
 <body>
 <div class="main">
-    <form method="post" th:action="@{/create-user}" th:object="${customer}">
-        <div class="box">Sign Up</div>
+    <form method="post" th:action="@{/Log-In}" th:object="${customer}">
+        <div class="box">Customer Log In</div>
         <div><input class="box" name="userName" placeholder="UserName" th:field="*{userName}" type="text"></div>
-        <div><input class="box" name="mobileNumber" placeholder="PhoneNumber" th:field="*{mobileNumber}" type="text">
-        </div>
         <div><input class="box" name="passWord" placeholder="PassWord" th:field="*{passWord}" type="password"></div>
-        <div><input class="box" type="submit" value="SignUp"></div>
+        <div><input class="box" type="submit" value="LogIn"></div>
     </form>
-    <div style="color: red" th:text="${massage}"></div>
 </div>
-
 </body>
 </html>

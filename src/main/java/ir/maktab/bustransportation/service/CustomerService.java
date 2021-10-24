@@ -6,5 +6,7 @@ public interface CustomerService {
 
     Customer createCustomer(Customer customer);
 
+    Customer logIn(Customer customer);
+
 
 }

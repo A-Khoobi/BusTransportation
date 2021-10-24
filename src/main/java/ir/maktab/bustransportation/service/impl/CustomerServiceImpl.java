@@ -6,6 +6,8 @@ import ir.maktab.bustransportation.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -18,7 +20,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        customerRepository.save(customer);
-        return customer;
+        List<Customer> customers = customerRepository.findByUserName(customer.getUserName());
+        if (customers.size() == 0) {
+            customerRepository.save(customer);
+            return customer;
+        } else return null;
     }
+
+    @Override
+    public Customer logIn(Customer customer) {
+        return null;
+    }
+
+
 }
