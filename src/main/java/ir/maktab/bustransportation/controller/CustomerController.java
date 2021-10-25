@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -75,10 +76,18 @@ public class CustomerController {
     }
 
     @GetMapping("/User-Page")
-    public String displayUserPage(TicketDto ticketDto, Model model) {
+    public String displayUserPage(TicketDto ticketDto, Model model, HttpSession session) {
         List<Location> locations = locationService.getAllLocations();
         model.addAttribute("locations", locations);
+        Customer customer = (Customer) session.getAttribute("customer");
+        model.addAttribute(customer);
         return "User-Page";
+    }
+
+    @GetMapping("/passenger-form")
+    public String displayPassengerForm(HttpServletRequest servletRequest, Model model) {
+        System.out.println(servletRequest.getParameter("ticketId"));
+        return "passenger-form";
     }
 
 }
