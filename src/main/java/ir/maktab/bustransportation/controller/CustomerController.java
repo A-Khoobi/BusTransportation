@@ -1,7 +1,10 @@
 package ir.maktab.bustransportation.controller;
 
 import ir.maktab.bustransportation.domain.Customer;
+import ir.maktab.bustransportation.domain.Location;
+import ir.maktab.bustransportation.dto.TicketDto;
 import ir.maktab.bustransportation.service.CustomerService;
+import ir.maktab.bustransportation.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private LocationService locationService;
 
     @GetMapping("/Sign_up")
     public String displaySignUpForm(Customer customer, HttpSession session, Model model) {
@@ -63,7 +70,15 @@ public class CustomerController {
             session.setAttribute("massage", massage);
             return "redirect:/Log-In";
         }
+
+
     }
 
+    @GetMapping("/User-Page")
+    public String displayUserPage(TicketDto ticketDto, Model model) {
+        List<Location> locations = locationService.getAllLocations();
+        model.addAttribute("locations", locations);
+        return "User-Page";
+    }
 
 }

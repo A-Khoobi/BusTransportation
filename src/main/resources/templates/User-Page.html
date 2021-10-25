@@ -1,17 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        #main {
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            width: 80%;
+            height: auto;
+            background-color: cornsilk;
+        }
+
+        select, input {
+            margin: 12px;
+            width: 150px;
+            height: 40px;
         }
     </style>
 </head>
 <body>
-<div></div>
-<div></div>
+<div id="main">
+    <div id="options"></div>
+    <div id="console">
+        <table>
+            <thead>
+            <tr>
+                <th>مبدا</th>
+                <th>مقصد</th>
+                <th>تاریخ</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <form action="/tickets" method="get" th:object="${ticketDto}">
+                <tr>
+                    <td>
+                        <select th:field="*{originID}">
+                            <option th:each="location : ${locations}" th:text="${location.name}"
+                                    th:value="${location.id}">
+                            </option>
+                        </select>
+                    </td>
+                    <td><select th:field="*{destinationID}">
+                        <option th:each="location : ${locations}" th:text="${location.name}" th:value="${location.id}">
+                        </option>
+                    </select>
+                    </td>
+                    <td>
+                        <input th:field="*{date}" type="date">
+                    </td>
+                    <td>
+                        <input type="submit" value="جستجو">
+                    </td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div>
+    <div id="t1">
 
+    </div>
+</div>
 </body>
 </html>
