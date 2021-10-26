@@ -9,6 +9,7 @@ import ir.maktab.bustransportation.repository.LocationRepository;
 import ir.maktab.bustransportation.repository.TicketRepository;
 import ir.maktab.bustransportation.service.CustomerTicketService;
 import ir.maktab.bustransportation.service.TicketService;
+import ir.maktab.bustransportation.service.comprator.TimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,7 @@ public class TicketController {
     @GetMapping("/tickets")
     public String displayTicketList(TicketDto ticketDto, Model model) {
         List<Ticket> tickets = ticketRepository.findtickets(ticketDto.getOriginID(), ticketDto.getDestinationID(), ticketDto.getDate());
+        tickets.sort(new TimeComparator());
         String origin = locationRepository.getById(ticketDto.getOriginID()).getName();
         String destination = locationRepository.getById(ticketDto.getDestinationID()).getName();
         model.addAttribute("origin", origin);
