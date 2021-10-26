@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -70,6 +71,40 @@ public class TicketController {
         String massage = sex + " " + passengerName + " " + "خرید بلیط شما با موفقیت انجام شد.";
         model.addAttribute("massage", massage);
         return "add-customer-ticket";
+    }
+
+    @GetMapping("/customers-ticket")
+    public String displayCustomerTickets(HttpSession session, Model model) {
+        Customer customer = (Customer) session.getAttribute("customer");
+        List<CustomerTicket> customerTickets = customerTicketService.findByCustomer(customer);
+        model.addAttribute("tickets", customerTickets);
+        return "customers-ticket";
+    }
+
+    @GetMapping("/ticket-detail")
+    public String displaySingleTicket(HttpServletRequest request, Model model) {
+        Integer ticketID = Integer.valueOf(request.getParameter("ticketId"));
+        CustomerTicket customerTicket = customerTicketService.getById(ticketID);
+        CustomerTicketDto t = new CustomerTicketDto();
+        t.setTicketId(customerTicket.getTicket().getId());
+        t.setPassengerName(customerTicket.getPassenger());
+        t.setGender(customerTicket.getGender());
+        t.setOrigin(customerTicket.getTicket().getOriginLocation().getName());
+        t.setDestination(customerTicket.getTicket().getDestinationLocation().getName());
+        t.setDate(customerTicket.getTicket().getDate());
+        t.setTime(customerTicket.getTicket().getTime());
+        t.setTripID(customerTicket.getTicket().getTripId());
+        t.setCustomerTicketId(ticketID);
+        model.addAttribute("ticket", t);
+        return "ticket-detail";
+    }
+
+    @PostMapping("/remove-ticket")
+    public String removeTicket(HttpServletRequest request, Model model) {
+        System.out.println(request.getParameter("removeID"));
+        Integer id = Integer.valueOf(request.getParameter("removeID"));
+        customerTicketService.remove(id);
+        return "redirect:/User-Page";
     }
 
 }

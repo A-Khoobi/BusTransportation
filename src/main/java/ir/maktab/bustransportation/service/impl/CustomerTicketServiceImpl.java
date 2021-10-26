@@ -23,6 +23,16 @@ public class CustomerTicketServiceImpl implements CustomerTicketService {
 
     @Override
     public List<CustomerTicket> findByCustomer(Customer customer) {
-        return null;
+        return customerTicketRepository.findByCustomer(customer);
+    }
+
+    @Override
+    public CustomerTicket getById(Integer id) {
+        return customerTicketRepository.getById(id);
+    }
+
+    @Override
+    public void remove(Integer id) {
+        customerTicketRepository.deleteById(id);
     }
 }

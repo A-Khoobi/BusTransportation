@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        #main {
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            height: auto;
+            background-color: cornsilk;
+        }
+
+        td {
+            direction: rtl;
+            width: 150px;
+            height: 60px;
+            border: solid black;
+            border-collapse: collapse;
+        }
+
+        tr {
+            border: solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            border: solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <table>
+        <tr>
+            <th colspan="2">بلیط اتوبوس</th>
+        </tr>
+        <tr>
+            <td th:text="${ticket.ticketId}">
+            </td>
+            <td>شناسه بلیط</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.passengerName}">
+            </td>
+            <td>نام</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.gender}">
+            </td>
+            <td>جنسیت</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.origin}">
+            </td>
+            <td>مبدا</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.destination}">
+            </td>
+            <td>مقصد</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.date}">
+            </td>
+            <td>تاریخ حرکت</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.time}">
+            </td>
+            <td>ساعت حرکت</td>
+        </tr>
+        <tr>
+            <td th:text="${ticket.tripID}">
+            </td>
+            <td>شناسه سفر</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="display: flex; justify-content: center">
+                    <form action="remove-ticket" method="post">
+                        <input name="removeID" th:value="${ticket.customerTicketId}" type="hidden"/>
+                        <input type="submit" value="لغو بلیط"/>
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

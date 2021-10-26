@@ -10,4 +10,8 @@ public interface CustomerTicketService {
     CustomerTicket save(CustomerTicket customerTicket);
 
     List<CustomerTicket> findByCustomer(Customer customer);
+
+    CustomerTicket getById(Integer id);
+
+    void remove(Integer id);
 }

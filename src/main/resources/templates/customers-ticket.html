@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+        #main {
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            height: auto;
+            background-color: cornsilk;
+        }
+
+        td {
+            direction: rtl;
+            width: 150px;
+            height: 60px;
+            border: solid black;
+            border-collapse: collapse;
+        }
+
+        tr {
+            border: solid black;
+            border-collapse: collapse;
+        }
+
+        table {
+            border: solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <table>
+        <tr>
+            <td colspan="3">لیست بلیط های خریداری شده</td>
+        </tr>
+        <tr>
+            <td>
+                تاریخ
+            </td>
+            <td>
+                شناسه بلیط
+            </td>
+            <td>
+                انتخاب
+            </td>
+        </tr>
+        <tr th:each="ticket : ${tickets}">
+            <td th:text="${ticket.ticket.date}"></td>
+            <td th:text="${ticket.ticket.id}"></td>
+            <td>
+                <form action="ticket-detail" method="get">
+                    <input name="ticketId" th:value="${ticket.id}" type="hidden"/>
+                    <input type="submit" value="مشاهده بلیط"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
