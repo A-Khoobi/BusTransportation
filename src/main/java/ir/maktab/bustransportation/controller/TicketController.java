@@ -1,6 +1,7 @@
 package ir.maktab.bustransportation.controller;
 
 import ir.maktab.bustransportation.domain.Ticket;
+import ir.maktab.bustransportation.dto.CustomerTicketDto;
 import ir.maktab.bustransportation.dto.TicketDto;
 import ir.maktab.bustransportation.repository.LocationRepository;
 import ir.maktab.bustransportation.repository.TicketRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -34,6 +36,16 @@ public class TicketController {
         model.addAttribute("tickets", tickets);
         model.addAttribute("date", ticketDto.getDate());
         return "show-tickets";
+    }
+
+    @GetMapping("/add-customer-ticket")
+    public String getPassengerInfo(HttpServletRequest request, CustomerTicketDto customerTicketDto, Model model) {
+        Integer ticketId = Integer.valueOf(request.getParameter("ticketID"));
+        String gender = request.getParameter("gender");
+        String passengerName = request.getParameter("name");
+        System.out.println(ticketId + gender + passengerName);
+
+        return "add-customer-ticket";
     }
 
 }

@@ -86,7 +86,8 @@ public class CustomerController {
 
     @GetMapping("/passenger-form")
     public String displayPassengerForm(HttpServletRequest servletRequest, Model model) {
-        System.out.println(servletRequest.getParameter("ticketId"));
+        String ticketID = servletRequest.getParameter("ticketId");
+        model.addAttribute("ticketID", ticketID);
         return "passenger-form";
     }
 
